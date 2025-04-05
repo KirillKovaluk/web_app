@@ -1,20 +1,44 @@
 <template>
+  <div>
     <div>
-      <div>
-        <span>home</span>
+      <span>home</span>
+    </div>
+    <div>
+      <span>cards: </span>
+    </div>
+    <div>
+      <div v-for="item in cardArray" :key="item.id">
+        <CardItem :name="item"></CardItem>
       </div>
     </div>
-  </template>
-  
-  <script>
-  export default {
-    props: {
-      msg: String
+  </div>
+</template>
+
+<script>
+
+import CardItem from '../components/CardItem' 
+
+export default {
+  components: {
+    CardItem,
+  },
+  data() {
+    return {
+      cardArray: ['a', 'b', 'c', 'd', 'e'],
     }
-  }
-  </script>
-  
-  <style scoped>
-  
-  </style>
+  },
+  watch: { 
+  },
+  computed: {
+  },
+  methods: {
+    testFoo() {
+    }
+  },
+}
+</script>
+
+<style scoped>
+
+</style>
   
