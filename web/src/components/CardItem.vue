@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <span>Card name: {{ name }}</span>
+      <span class="test test2">Card name: {{ name }}</span>
     </div>
   </div>
 </template>
@@ -20,6 +20,11 @@ export default {
 </script>
   
 <style scoped>
-  
+.test {
+  color: red;
+}
+.test2 {
+  font-weight: bold;
+}
 </style>
   
