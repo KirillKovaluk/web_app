@@ -16,9 +16,12 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+
+@use "@/assets/scss/global.scss";
+
 .router-view {
-  padding-top: 60px;
+  padding-top: 80px;
 }
 body {
   margin: 0;
