@@ -1,23 +1,22 @@
 <template>
   <div>
+
     <RouterView></RouterView>
   </div>
 </template>
 
 <script>
 //import HelloWorld from './components/HelloWorld.vue'
+import Menu from './components/Menu.vue'
 
 export default {
   components: {
-    //HelloWorld
+    Menu,
   }
 }
 </script>
 
 <style>
-.test {
-  color: red;
-}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -25,6 +24,5 @@ export default {
   text-align: center;
   color: #077a16;
   margin-top: 60px;
-  
 }
 </style>

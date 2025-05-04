@@ -8,7 +8,7 @@
     </div>
     <div>
       <div v-for="item in cardArray" :key="item.id">
-        <CardItem :name="item"></CardItem>
+        <LotCard :name="item"></LotCard>
       </div>
     </div>
   </div>
@@ -16,11 +16,11 @@
 
 <script>
 
-import CardItem from '../components/CardItem' 
+import LotCard from '../components/LotCard' 
 
 export default {
   components: {
-    CardItem,
+    LotCard,
   },
   data() {
     return {
@@ -41,4 +41,3 @@ export default {
 <style scoped>
 
 </style>
-  
