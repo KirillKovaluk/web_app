@@ -4,7 +4,7 @@
 
       <div class="nav-left">
         <div @click="home" class="navbar-block">
-          <span class="navbar-text nav-item">Auction</span>
+          <span class="navbar-text">Auction</span>
         </div>
       </div>
 
@@ -81,13 +81,5 @@ export default {
 }
 .nav-item:hover {
   text-decoration: underline;
-}
-.button {
-  background-color: #127e3f;
-  color: black;
-  padding: 12px 20px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
 }
 </style>
