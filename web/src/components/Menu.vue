@@ -3,18 +3,18 @@
     <div class="navbar">
 
       <div class="nav-left">
-        <div class="navbar-block">
+        <div @click="home" class="navbar-block">
           <span class="navbar-text">Auction</span>
         </div>
       </div>
 
 
       <div class="nav-right">
-        <div class="navbar-block margin-left-20">
-          <span class="navbar-text">Registration</span>
+        <div @click="registration" class="navbar-block margin-left-20">
+          <span class="navbar-text nav-item">Registration</span>
         </div>
-        <div class="navbar-block margin-left-20">
-          <span class="navbar-text">Login</span>
+        <div @click="login" class="navbar-block margin-left-20">
+          <span class="navbar-text nav-item">Login</span>
         </div>
       </div>
 
@@ -38,7 +38,14 @@ export default {
   computed: {
   },
   methods: {
-    testFoo() {
+    home() {
+      this.$router.push('/');
+    },
+    registration() {
+      this.$router.push('/registration');
+    },
+    login() {
+      this.$router.push('/login');
     }
   },
 }
@@ -71,5 +78,8 @@ export default {
 }
 .margin-left-20 {
   margin-left: 20px;
+}
+.nav-item:hover {
+  text-decoration: underline;
 }
 </style>
