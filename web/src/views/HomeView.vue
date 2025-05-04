@@ -16,7 +16,7 @@
 
 <script>
 
-import LotCard from '../components/LotCard' 
+import LotCard from '../components/LotCard'
 
 export default {
   components: {

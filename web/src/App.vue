@@ -1,7 +1,7 @@
 <template>
   <div>
-
-    <RouterView></RouterView>
+    <Menu></Menu>
+    <RouterView class="router-view"></RouterView>
   </div>
 </template>
 
@@ -17,12 +17,10 @@ export default {
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #077a16;
-  margin-top: 60px;
+.router-view {
+  padding-top: 60px;
+}
+body {
+  margin: 0;
 }
 </style>

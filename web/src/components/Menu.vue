@@ -1,30 +1,36 @@
 <template>
   <div>
-    <div>
-      <span>home</span>
-    </div>
-    <div>
-      <span>cards: </span>
-    </div>
-    <div>
-      <div v-for="item in cardArray" :key="item.id">
-        <LotCard :name="item"></LotCard>
+    <div class="navbar">
+
+      <div class="nav-left">
+        <div class="navbar-block">
+          <span class="navbar-text">Auction</span>
+        </div>
       </div>
+
+
+      <div class="nav-right">
+        <div class="navbar-block margin-left-20">
+          <span class="navbar-text">Registration</span>
+        </div>
+        <div class="navbar-block margin-left-20">
+          <span class="navbar-text">Login</span>
+        </div>
+      </div>
+
+
     </div>
   </div>
 </template>
 
 <script>
 
-import LotCard from '../components/LotCard' 
-
 export default {
   components: {
-    LotCard,
   },
   data() {
     return {
-      cardArray: 'teee',
+      test: 'teee',
     }
   },
   watch: { 
@@ -39,5 +45,31 @@ export default {
 </script>
 
 <style scoped>
-
+.navbar {
+  display: flex;
+  position: fixed;
+  width: 100%;
+  height: 60px;
+  background-color: #6EAE97;
+}
+.nav-left {
+  display: flex;
+}
+.nav-right {
+  display: flex;
+  margin-left: auto;
+}
+.navbar-block {
+  padding: 21px;
+  cursor: pointer;
+}
+.navbar-text {
+  font-weight: bold;
+}
+.right {
+  text-align: right;
+}
+.margin-left-20 {
+  margin-left: 20px;
+}
 </style>
