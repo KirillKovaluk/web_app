@@ -20,6 +20,9 @@
 </template>
 
 <script>
+
+import axios from 'axios';
+
 export default {
   components: {
   },
@@ -55,7 +58,11 @@ export default {
   },
   methods: {
     registration() {
-      console.log('registration');
+      axios.get('http://localhost:5041/user/get-test/')
+      .then((response) => {
+        console.log(response);
+      });
+
     }
   },
 }
