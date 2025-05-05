@@ -1,20 +1,20 @@
 <template>
   <div class="outer-container">
     <div class="registration-field">
-      <h2>Регистрация</h2>
+      <h2>Registration</h2>
       <div class="input-column outer-container">
-        <input type="text" placeholder="Введите ваше имя" />
+        <input type="text" placeholder="Enter name" />
       </div>
       <div class="input-column outer-container">
-        <input type="email" placeholder="Введите ваш email" />
+        <input type="email" placeholder="Enter email" />
       </div>
       <div class="input-column outer-container">
-        <input type="password" placeholder="Введите ваш пароль" />
+        <input type="password" placeholder="Enter password" />
       </div>
       <div class="input-column outer-container">
-        <input type="confirm password" placeholder="Повторите ваш пароль" />
+        <input type="confirm password" placeholder="Confirm password" />
       </div>
-        <button class="register-button">Зарегистрироваться</button>
+        <button class="register-button">Register</button>
     </div>
   </div>
 </template>
@@ -48,7 +48,6 @@ export default {
 .registration-field {
   margin-top: 110px;
   width: 400px;
-  height: 400px;
   border-radius: 50px;
   padding: 20px;
   background: linear-gradient(90deg, rgba(89, 207, 89, 1) 0%, rgba(87, 199, 133, 1) 50%, rgba(139, 237, 83, 1) 100%);
