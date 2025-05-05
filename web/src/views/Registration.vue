@@ -3,18 +3,18 @@
     <div class="registration-field">
       <h2>Registration</h2>
       <div class="input-column outer-container">
-        <input type="text" placeholder="Enter name" />
+        <input v-model="name" type="text" placeholder="Enter name" />
       </div>
       <div class="input-column outer-container">
-        <input type="email" placeholder="Enter email" />
+        <input v-model="email" type="email" placeholder="Enter email" />
       </div>
       <div class="input-column outer-container">
-        <input type="password" placeholder="Enter password" />
+        <input v-model="password" type="password" placeholder="Enter password" />
       </div>
       <div class="input-column outer-container">
-        <input type="confirm password" placeholder="Confirm password" />
+        <input v-model="passwordConfirm" type="password" placeholder="Confirm password" />
       </div>
-        <button @click="registration" class="register-button">Register</button>
+        <button @click="registration" :disabled="registrationError" class="register-button">Register</button>
     </div>
   </div>
 </template>
@@ -25,12 +25,33 @@ export default {
   },
   data() {
     return {
-      test: 'teee',
+      name: '',
+      email: '',
+      password: '',
+      passwordConfirm: '',
     }
   },
   watch: { 
   },
   computed: {
+    registrationError() {
+      return this.nameError || this.emailError || this.passwordError || this.passwordConfirmError || this.passwordCheckError;
+    },
+    nameError() {
+      return this.name.length === 0;
+    },
+    emailError() {
+      return this.email.length === 0;
+    },
+    passwordError() {
+      return this.password.length === 0;
+    },
+    passwordConfirmError() {
+      return this.passwordConfirm.length === 0;
+    },
+    passwordCheckError() {
+      return this.password !== this.passwordConfirm;
+    },
   },
   methods: {
     registration() {
@@ -83,5 +104,11 @@ export default {
 }
 .register-button:focus {
   outline: none;
+}
+.register-button:disabled {
+  background: #b4c2b4;
+  background: linear-gradient(90deg, rgba(180, 194, 180, 1) 0%, rgba(95, 110, 100, 1) 50%, rgba(118, 130, 111, 1) 100%);
+  transition: none;
+  transform: none;
 }
 </style>
