@@ -14,7 +14,7 @@
       <div class="input-column outer-container">
         <input type="confirm password" placeholder="Confirm password" />
       </div>
-        <button class="register-button">Register</button>
+        <button @click="registration" class="register-button">Register</button>
     </div>
   </div>
 </template>
@@ -33,7 +33,8 @@ export default {
   computed: {
   },
   methods: {
-    testFoo() {
+    registration() {
+      console.log('registration');
     }
   },
 }
