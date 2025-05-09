@@ -58,11 +58,11 @@ export default {
   },
   methods: {
     registration() {
-      userController.getTestAsyncHttpGet()
+      userController.createUserAsyncHttpPost(this.name, this.email, this.password)
         .then((response) => {
           console.log(response);
         });
-    }
+    },
   },
 }
 </script>

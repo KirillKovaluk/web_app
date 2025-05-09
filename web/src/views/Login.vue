@@ -41,11 +41,11 @@ export default {
   },
   methods: {
     login() {
-      userController.getTestAsyncHttpGet()
+      userController.loginUserAsyncHttpPost(this.name, this.password)
         .then((response) => {
           console.log(response);
         });
-    }
+    },
   },
 }
 </script>

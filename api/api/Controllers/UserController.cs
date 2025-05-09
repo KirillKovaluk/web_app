@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
+using api.Models;
+using api.Services;
 
 namespace api.Controllers
 {
@@ -11,11 +13,18 @@ namespace api.Controllers
 
         }
 
-        [HttpGet(Name = "GetTestAsync")]
-        [Route("get-test")]
-        public async Task<string> GetTestAsync()
+        [HttpPost(Name = "CreateUserAsync")]
+        [Route("create-user")]
+        public async Task<string> CreateUserAsync(UserCreateInput userCreateInput)
         {
-            return await Task.FromResult<string>("Test");
+            return await Task.FromResult<string>("Test1");
+        }
+
+        [HttpPost(Name = "LoginUserAsync")]
+        [Route("login-user")]
+        public async Task<string> LoginUserAsync(UserLoginInput userLoginInput)
+        {
+            return await Task.FromResult<string>("Test1");
         }
     }
 }
