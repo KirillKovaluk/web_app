@@ -1,3 +1,5 @@
+using api.DataContext;
+using Microsoft.EntityFrameworkCore;
 
 namespace api
 {
@@ -8,6 +10,10 @@ namespace api
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+
+            string connectionString = builder.Configuration.GetConnectionString("ConnectionString");
+
+            builder.Services.AddDbContext<Context>(options => options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
             builder.Services.AddControllers();
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
