@@ -75,7 +75,7 @@ export default {
 
 }
 .registration-field {
-  margin-top: 110px;
+  margin-top: 180px;
   width: 400px;
   border-radius: 50px;
   padding: 20px;
