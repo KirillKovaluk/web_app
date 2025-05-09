@@ -21,7 +21,7 @@
 
 <script>
 
-import axios from 'axios';
+import { userController } from '@/services/apiService';
 
 export default {
   components: {
@@ -58,11 +58,10 @@ export default {
   },
   methods: {
     registration() {
-      axios.get('http://localhost:5041/user/get-test/')
-      .then((response) => {
-        console.log(response);
-      });
-
+      userController.getTestAsyncHttpGet()
+        .then((response) => {
+          console.log(response);
+        });
     }
   },
 }
