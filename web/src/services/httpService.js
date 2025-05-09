@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'https://localhost:5041/';
+const API_URL = 'https://localhost:7245/';
 
 export default function api(apiConfig) {
   let url = `${API_URL}${apiConfig.url}`;
