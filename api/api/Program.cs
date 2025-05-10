@@ -11,7 +11,7 @@ namespace api
 
             // Add services to the container.
 
-            string connectionString = builder.Configuration.GetConnectionString("ConnectionString");
+            string? connectionString = builder.Configuration.GetConnectionString("ConnectionString");
 
             builder.Services.AddDbContext<Context>(options => options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 

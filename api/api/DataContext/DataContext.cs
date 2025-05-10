@@ -1,7 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using api.Models;
-using System.Data;
-using System.Diagnostics.Metrics;
 
 namespace api.DataContext
 {
