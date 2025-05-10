@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using api.Models;
 using api.Services;
+using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace api.Controllers
 {
@@ -8,16 +8,19 @@ namespace api.Controllers
     [Route("[controller]")]
     public class UserController : ControllerBase
     {
-        public UserController()
-        {
+        private readonly IUserService _userService;
 
+        public UserController(IUserService userService)
+        {
+            _userService = userService;
         }
 
         [HttpPost(Name = "CreateUserAsync")]
         [Route("create-user")]
-        public async Task<string> CreateUserAsync(UserCreateInput userCreateInput)
+        public async Task<IActionResult> CreateUserAsync(UserCreateInput userCreateInput)
         {
-            return await Task.FromResult<string>("Test1");
+            await _userService.CreateUserAsync(userCreateInput);
+            return Ok();
         }
 
         [HttpPost(Name = "LoginUserAsync")]

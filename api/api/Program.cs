@@ -1,5 +1,6 @@
 using api.DataContext;
 using Microsoft.EntityFrameworkCore;
+using api.Services;
 
 namespace api
 {
@@ -14,6 +15,10 @@ namespace api
             string? connectionString = builder.Configuration.GetConnectionString("ConnectionString");
 
             builder.Services.AddDbContext<Context>(options => options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+
+            // Add services .AddTransient .AddSingleton .AddScoped
+            builder.Services
+                .AddScoped<IUserService, UserService>();
 
             builder.Services.AddControllers();
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
