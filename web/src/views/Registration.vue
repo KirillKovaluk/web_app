@@ -34,7 +34,12 @@
           <input v-model="passwordConfirm" type="password" placeholder="Confirm password" />
         </div>
       </div>
+      <div>
         <button @click="registration" :disabled="registrationError" class="register-button">Register</button>
+      </div>
+      <div class="margin-top-10 message">
+        <span v-show="isErrorMessege">test</span>
+      </div>
     </div>
   </div>
 </template>
@@ -52,6 +57,7 @@ export default {
       email: '',
       password: '',
       passwordConfirm: '',
+      isErrorMessege: false,
     }
   },
   watch: { 
@@ -79,8 +85,11 @@ export default {
   methods: {
     registration() {
       userController.createUserAsyncHttpPost(this.name, this.email, this.password)
-        .then((response) => {
-          console.log(response);
+        .then(() => {
+          this.$router.push('/login');
+        })
+        .catch((e) => {
+          console.log(e);
         });
     },
   },
@@ -114,6 +123,7 @@ export default {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 .register-button {
+  margin-top: 10px;
   cursor: pointer;
   background: linear-gradient(90deg, rgba(9, 133, 9, 1) 0%, rgba(20, 143, 71, 1) 50%, rgba(72, 179, 14, 1) 100%);
   border: none;
@@ -135,5 +145,8 @@ export default {
   background: linear-gradient(90deg, rgba(180, 194, 180, 1) 0%, rgba(95, 110, 100, 1) 50%, rgba(118, 130, 111, 1) 100%);
   transition: none;
   transform: none;
+}
+.message{
+  height: 20px;
 }
 </style>

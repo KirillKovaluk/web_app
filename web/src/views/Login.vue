@@ -18,7 +18,12 @@
           <input v-model="password" type="password" placeholder="Enter password" />
         </div>
       </div>
+      <div>
         <button @click="login" :disabled="loginError" class="login-button">Login</button>
+      </div>
+      <div class="margin-top-10 message">
+        <span v-show="isErrorMessege">test</span>
+      </div>
     </div>
   </div>
 </template>
@@ -54,6 +59,9 @@ export default {
       userController.loginUserAsyncHttpPost(this.name, this.password)
         .then((response) => {
           console.log(response);
+        })
+        .catch((e) => {
+          console.log(e);
         });
     },
   },
@@ -64,7 +72,6 @@ export default {
 .outer-container {
   display: flex;
   justify-content: center;
-
 }
 .login-field {
   margin-top: 250px;
@@ -88,6 +95,7 @@ export default {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 .login-button {
+  margin-top: 10px;
   cursor: pointer;
   background: linear-gradient(90deg, rgba(9, 133, 9, 1) 0%, rgba(20, 143, 71, 1) 50%, rgba(72, 179, 14, 1) 100%);
   border: none;
@@ -109,5 +117,8 @@ export default {
   background: linear-gradient(90deg, rgba(180, 194, 180, 1) 0%, rgba(95, 110, 100, 1) 50%, rgba(118, 130, 111, 1) 100%);
   transition: none;
   transform: none;
+}
+.message{
+  height: 20px;
 }
 </style>
