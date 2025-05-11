@@ -2,11 +2,21 @@
   <div class="outer-container">
     <div class="login-field">
       <h2>Login</h2>
-      <div class="input-column outer-container">
-        <input v-model="name" type="text" placeholder="Enter name" />
+      <div class="input-column">
+        <div>
+          <span>Name</span>
+        </div>
+        <div class="margin-top-4">
+          <input v-model="name" type="text" placeholder="Enter name" />
+        </div>
       </div>
-      <div class="input-column outer-container">
-        <input v-model="password" type="password" placeholder="Enter password" />
+      <div class="input-column">
+        <div>
+          <span>Password</span>
+        </div>
+        <div class="margin-top-4">
+          <input v-model="password" type="password" placeholder="Enter password" />
+        </div>
       </div>
         <button @click="login" :disabled="loginError" class="login-button">Login</button>
     </div>
@@ -74,7 +84,7 @@ export default {
   width: 90%;
   padding: 15px;
   border: none;
-  border-radius: 15px;
+  border-radius: 6px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 .login-button {

@@ -2,17 +2,37 @@
   <div class="outer-container">
     <div class="registration-field">
       <h2>Registration</h2>
-      <div class="input-column outer-container">
-        <input v-model="name" type="text" placeholder="Enter name" />
+      <div class="input-column">
+        <div>
+          <span>Name</span>
+        </div>
+        <div class="margin-top-4">
+          <input v-model="name" type="text" placeholder="Enter name" />
+        </div>
       </div>
-      <div class="input-column outer-container">
-        <input v-model="email" type="email" placeholder="Enter email" />
+      <div class="input-column">
+        <div>
+          <span>Email</span>
+        </div>
+        <div class="margin-top-4">
+          <input v-model="email" type="email" placeholder="Enter email" />
+        </div>
       </div>
-      <div class="input-column outer-container">
-        <input v-model="password" type="password" placeholder="Enter password" />
+      <div class="input-column">
+        <div>
+          <span>Password</span>
+        </div>
+        <div class="margin-top-4">
+          <input v-model="password" type="password" placeholder="Enter password" />
+        </div>
       </div>
-      <div class="input-column outer-container">
-        <input v-model="passwordConfirm" type="password" placeholder="Confirm password" />
+      <div class="input-column">
+        <div>
+          <span>ConfirmPassword</span>
+        </div>
+        <div class="margin-top-4">
+          <input v-model="passwordConfirm" type="password" placeholder="Confirm password" />
+        </div>
       </div>
         <button @click="registration" :disabled="registrationError" class="register-button">Register</button>
     </div>
@@ -71,7 +91,6 @@ export default {
 .outer-container {
   display: flex;
   justify-content: center;
-
 }
 .registration-field {
   margin-top: 180px;
@@ -91,7 +110,7 @@ export default {
   width: 90%;
   padding: 15px;
   border: none;
-  border-radius: 15px;
+  border-radius: 6px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 .register-button {
