@@ -1,6 +1,7 @@
 using api.DataContext;
 using Microsoft.EntityFrameworkCore;
 using api.Services;
+using api.Controllers.Filters;
 
 namespace api
 {
@@ -10,7 +11,11 @@ namespace api
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
+            // Add services to the container
+            builder.Services.AddMvc(options =>
+            {
+                options.Filters.Add<FilterAction>();
+            });
 
             string? connectionString = builder.Configuration.GetConnectionString("ConnectionString");
 
@@ -18,7 +23,10 @@ namespace api
 
             // Add services .AddTransient .AddSingleton .AddScoped
             builder.Services
-                .AddScoped<IUserService, UserService>();
+                .AddScoped<IErrorService, ErrorService>()
+                .AddScoped<IUserService, UserService>()
+
+                ;
 
             builder.Services.AddControllers();
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
