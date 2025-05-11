@@ -38,7 +38,7 @@ export default {
   },
   computed: {
     registrationError() {
-      return false;//this.nameError || this.emailError || this.passwordError || this.passwordConfirmError || this.passwordCheckError;
+      return this.nameError || this.emailError || this.passwordError || this.passwordConfirmError || this.passwordCheckError;
     },
     nameError() {
       return this.name.length === 0;
