@@ -2,15 +2,15 @@ import { defineStore } from 'pinia';
 
 export const useMyStore = defineStore('store', {
   state: () => ({
-    count: 0,
-    name: 'Pinia'
+    user: null,
+    token: null,
   }),
   actions: {
-    increment() {
-      this.count++;
+    setUser(user) {
+      this.user = user;
     },
-    setName(newName) {
-      this.name = newName;
+    setToken(token) {
+      this.token = token;
     }
   },
 });

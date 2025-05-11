@@ -25,9 +25,10 @@ namespace api.Controllers
 
         [HttpPost(Name = "LoginUserAsync")]
         [Route("login-user")]
-        public async Task<string> LoginUserAsync(UserLoginInput userLoginInput)
+        public async Task<IActionResult> LoginUserAsync(UserLoginInput userLoginInput)
         {
-            return await Task.FromResult<string>("Test1");
+            var vm = await _userService.LoginUserAsync(userLoginInput);
+            return Ok(vm);
         }
     }
 }

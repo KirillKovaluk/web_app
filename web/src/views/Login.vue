@@ -31,6 +31,7 @@
 <script>
 
 import { userController } from '@/services/apiService';
+import { store } from '@/store/store';
 
 export default {
   components: {
@@ -39,6 +40,7 @@ export default {
     return {
       name: '',
       password: '',
+      isErrorMessege: false,
     }
   },
   watch: { 
@@ -59,6 +61,8 @@ export default {
       userController.loginUserAsyncHttpPost(this.name, this.password)
         .then((response) => {
           console.log(response);
+          store.setUser(response);
+          store.setToken(response.token);
         })
         .catch((e) => {
           console.log(e);

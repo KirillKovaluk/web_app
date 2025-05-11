@@ -24,6 +24,7 @@ namespace api
             // Add services .AddTransient .AddSingleton .AddScoped
             builder.Services
                 .AddScoped<IErrorService, ErrorService>()
+                .AddSingleton<IJWTService, JWTService>()
                 .AddScoped<IUserService, UserService>()
 
                 ;

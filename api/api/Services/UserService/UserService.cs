@@ -1,8 +1,6 @@
 ﻿using api.DataContext;
 using Microsoft.EntityFrameworkCore;
 using api.Models;
-using System.Security.Cryptography;
-using System.Text;
 
 namespace api.Services
 {
@@ -10,12 +8,15 @@ namespace api.Services
     {
         private readonly IErrorService _errorService;
         private readonly Context _context;
+        private readonly IJWTService _jWTService;
         public UserService(
             IErrorService errorService,
-            Context context) 
+            Context context,
+            IJWTService jWTService) 
         {
             _errorService = errorService;
             _context = context;
+            _jWTService = jWTService;
         }
 
         public async Task CreateUserAsync(UserCreateInput userCreateInput)
@@ -52,7 +53,7 @@ namespace api.Services
             {
                 Name = userCreateInput.Name,
                 Email = userCreateInput.Email,
-                Password = CreateHash(userCreateInput.Password),
+                Password = _jWTService.CreateHash(userCreateInput.Password),
             };
 
             _context.Users.Add(user);
@@ -60,24 +61,37 @@ namespace api.Services
             await _context.SaveChangesAsync();
         }
 
-        #region Private Methods
-
-        private string CreateHash(string inputString)
+        public async Task<UserView> LoginUserAsync(UserLoginInput userLoginInput)
         {
-            string GetStringFromHash(byte[] hashValue)
+            if (string.IsNullOrEmpty(userLoginInput.Name)
+                || string.IsNullOrEmpty(userLoginInput.Password))
             {
-                StringBuilder result = new StringBuilder();
-                for (int i = 0; i < hashValue.Length; i++)
-                {
-                    result.Append(hashValue[i].ToString("X2"));
-                }
-                return result.ToString();
+                _errorService.Add(ErrorCode.MODEL_IS_INVALID);
+                return null;
             }
 
-            var sha512 = SHA512.Create();
-            byte[] bytes = Encoding.UTF8.GetBytes(inputString);
-            byte[] hash = sha512.ComputeHash(bytes);
-            return GetStringFromHash(hash);
+            var userPasswordHashed = _jWTService.CreateHash(userLoginInput.Password);
+
+            var user = await _context.Users
+                .AsNoTracking()
+                .FirstOrDefaultAsync(x => x.Name == userLoginInput.Name && x.Password == userPasswordHashed);
+
+            if (user == null) 
+            {
+                _errorService.Add(ErrorCode.USER_NOT_FOUND);
+                return null;
+            }
+
+            var token = GetToken(user);
+
+            return user.ToView(token);
+        }
+
+        #region Private Methods
+
+        private string GetToken(User user)
+        {
+            return _jWTService.GetToken(user);
         }
 
         #endregion
