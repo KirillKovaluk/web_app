@@ -31,7 +31,7 @@
 <script>
 
 import { userController } from '@/services/apiService';
-import { store } from '@/store/store';
+import { useStore } from '@/stores/store';
 
 export default {
   components: {
@@ -60,9 +60,9 @@ export default {
     login() {
       userController.loginUserAsyncHttpPost(this.name, this.password)
         .then((response) => {
+          const store = useStore();
           console.log(response);
-          store.setUser(response);
-          store.setToken(response.token);
+          store.loginUser(response);
         })
         .catch((e) => {
           console.log(e);
