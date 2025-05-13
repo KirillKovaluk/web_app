@@ -6,6 +6,9 @@
         <div @click="home" class="stile-button">
           <span class="navbar-text">Auction</span>
         </div>
+        <div @click="about" class="stile-button margin-left-20">
+          <span class="navbar-text">About</span>
+        </div>
       </div>
 
       <div class="nav-right">
@@ -15,6 +18,13 @@
         <div @click="login" class="margin-left-20 stile-button">
           <span class="navbar-text">Login</span>
         </div>
+
+        <div @click="profile" class="margin-left-20 stile-button">
+          <span class="navbar-text">Profile</span>
+        </div>
+        <div @click="logout" class="margin-left-20 stile-button">
+          <span class="navbar-text">Logout</span>
+        </div>
       </div>
 
     </div>
@@ -22,6 +32,7 @@
 </template>
 
 <script>
+import { useStore } from '@/stores/store';
 
 export default {
   components: {
@@ -39,12 +50,23 @@ export default {
     home() {
       this.$router.push('/');
     },
+    about() {
+      this.$router.push('/about');
+    },
     registration() {
       this.$router.push('/registration');
     },
     login() {
       this.$router.push('/login');
-    }
+    },
+    profile() {
+      this.$router.push('/profile');
+    },
+    logout() {
+      const store = useStore();
+      store.logoutUser();
+      this.$router.push('/');
+    },
   },
 }
 </script>
@@ -72,9 +94,6 @@ export default {
 }
 .right {
   text-align: right;
-}
-.margin-left-20 {
-  margin-left: 20px;
 }
 .stile-button {
   cursor: pointer;

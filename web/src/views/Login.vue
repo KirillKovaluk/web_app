@@ -61,8 +61,8 @@ export default {
       userController.loginUserAsyncHttpPost(this.name, this.password)
         .then((response) => {
           const store = useStore();
-          console.log(response);
           store.loginUser(response);
+          this.$router.push('/profile');
         })
         .catch((e) => {
           console.log(e);

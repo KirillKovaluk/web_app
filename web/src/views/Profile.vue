@@ -1,21 +1,22 @@
 <template>
   <div>
-    <div class="text-center">
-      <span>Home</span>
+    <div class="text-center margin-top-10">
+      <span>Profile</span>
+    </div>
+    <div class="text-center margin-top-10">
+      <span>Information</span>
     </div>
   </div>
 </template>
 
 <script>
 
-//import LotCard from '../components/LotCard'
-
 export default {
   components: {
   },
   data() {
     return {
-      cardArray: ['a', 'b', 'c', 'd', 'e'],
+
     }
   },
   watch: { 

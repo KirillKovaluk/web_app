@@ -1,21 +1,18 @@
 <template>
   <div>
-    <div class="text-center">
-      <span>Home</span>
+    <div class="text-center margin-top-10">
+      <span>AuctionService - It is an online application that allows businesses or individuals to sell products in a bidding format</span>
     </div>
   </div>
 </template>
 
 <script>
 
-//import LotCard from '../components/LotCard'
-
 export default {
   components: {
   },
   data() {
     return {
-      cardArray: ['a', 'b', 'c', 'd', 'e'],
     }
   },
   watch: { 
