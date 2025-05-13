@@ -28,5 +28,8 @@ export const useStore = defineStore('store', {
       this.user = JSON.parse(localStorage.getItem(USER_KEY));
       this.token = localStorage.getItem(TOKEN_ACCESS_KEY);
     },
+    getUser() {
+      return this.user;
+    },
   },
 });

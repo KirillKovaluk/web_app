@@ -6,26 +6,37 @@
     <div class="text-center margin-top-10">
       <span>Information</span>
     </div>
+    <div class="text-center margin-top-10">
+      <span>Name:&nbsp;</span>
+      <span>{{ user.name }}</span>
+    </div>
   </div>
 </template>
 
 <script>
+
+import { useStore } from '@/stores/store';
 
 export default {
   components: {
   },
   data() {
     return {
-
+      user: null,
     }
+  },
+  created() {
+    this.start();
   },
   watch: { 
   },
   computed: {
   },
   methods: {
-    testFoo() {
-    }
+    start() {
+      const store = useStore();
+      this.user = store.getUser();
+    },
   },
 }
 </script>
