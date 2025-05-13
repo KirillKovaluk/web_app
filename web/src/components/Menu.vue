@@ -12,19 +12,27 @@
       </div>
 
       <div class="nav-right">
-        <div @click="registration" class="margin-left-20 stile-button">
-          <span class="navbar-text">Registration</span>
-        </div>
-        <div @click="login" class="margin-left-20 stile-button">
-          <span class="navbar-text">Login</span>
+
+        <div v-if="isAuthorized" class="nav-block">
+          <div @click="profile" class="margin-left-20 stile-button">
+            <span class="navbar-text">Profile</span>
+          </div>
+          <div @click="logout" class="margin-left-20 stile-button">
+            <span class="navbar-text">Logout</span>
+          </div>
         </div>
 
-        <div @click="profile" class="margin-left-20 stile-button">
-          <span class="navbar-text">Profile</span>
+        <div v-else class="nav-block">
+          <div @click="registration" class="margin-left-20 stile-button">
+            <span class="navbar-text">Registration</span>
+          </div>
+          <div @click="login" class="margin-left-20 stile-button">
+            <span class="navbar-text">Login</span>
+          </div>
         </div>
-        <div @click="logout" class="margin-left-20 stile-button">
-          <span class="navbar-text">Logout</span>
-        </div>
+
+
+
       </div>
 
     </div>
@@ -45,6 +53,10 @@ export default {
   watch: { 
   },
   computed: {
+    isAuthorized() {
+      const store = useStore();
+      return store.isAuthorized();
+    },
   },
   methods: {
     home() {
@@ -86,6 +98,10 @@ export default {
 }
 .nav-right {
   padding: 10px;
+  display: flex;
+  margin-left: auto;
+}
+.nav-block {
   display: flex;
   margin-left: auto;
 }
