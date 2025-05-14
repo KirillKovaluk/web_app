@@ -2,6 +2,10 @@ import axios from 'axios';
 
 const API_URL = 'https://localhost:7245/';
 
+function responseError(e) {
+  return Promise.reject(e);
+}
+
 export default function api(apiConfig) {
   let url = `${API_URL}${apiConfig.url}`;
   let headers = { 
@@ -22,7 +26,7 @@ export default function api(apiConfig) {
         return response.data;
       })
       .catch(e => {
-        return e;
+        return responseError(e);
       }),
       
     get: () => axios.get(url, config)
@@ -30,7 +34,7 @@ export default function api(apiConfig) {
         return response.data;
       })
       .catch(e => {
-        return e;
+        return responseError(e);
       }),
 
     put: data => axios.put(url, data, config)
@@ -38,7 +42,7 @@ export default function api(apiConfig) {
         return response.data;
       })
       .catch(e => {
-        return e;
+        return responseError(e);
       }),
 
     patch: data => axios.patch(url, data, config)
@@ -46,7 +50,7 @@ export default function api(apiConfig) {
         return response.data;
       })
       .catch(e => {
-        return e;
+        return responseError(e);
       }),
 
     delete: () => axios.delete(url, config)
@@ -54,7 +58,7 @@ export default function api(apiConfig) {
         return response.data;
       })
       .catch(e => {
-        return e;
+        return responseError(e);
       }),
   };
 }

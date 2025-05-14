@@ -25,6 +25,7 @@ namespace api
             builder.Services
                 .AddScoped<IErrorService, ErrorService>()
                 .AddSingleton<IJWTService, JWTService>()
+                .AddScoped<ILotService, LotService>()
                 .AddScoped<IUserService, UserService>()
 
                 ;
