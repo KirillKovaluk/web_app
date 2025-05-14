@@ -9,6 +9,13 @@
         <div @click="about" class="stile-button margin-left-20">
           <span class="navbar-text">About</span>
         </div>
+
+        <div @click="lots" class="stile-button margin-left-20">
+          <span class="navbar-text">Lots</span>
+        </div>
+        <div v-if="isAuthorized" @click="lotsUser" class="stile-button margin-left-20">
+          <span class="navbar-text">My Lots</span>
+        </div>        
       </div>
 
       <div class="nav-right">
@@ -30,8 +37,6 @@
             <span class="navbar-text">Login</span>
           </div>
         </div>
-
-
 
       </div>
 
@@ -64,6 +69,12 @@ export default {
     },
     about() {
       this.$router.push('/about');
+    },
+    lots() {
+      this.$router.push('/lots');
+    },
+    lotsUser() {
+      this.$router.push('/lots-user');
     },
     registration() {
       this.$router.push('/registration');
@@ -112,6 +123,8 @@ export default {
   text-align: right;
 }
 .stile-button {
+  min-width: 60px;
+  text-align: center;
   cursor: pointer;
   background: linear-gradient(90deg, rgba(9, 133, 9, 1) 0%, rgba(20, 143, 71, 1) 50%, rgba(72, 179, 14, 1) 100%);
   border: none;
