@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using api.Services;
-using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace api.Controllers
 {
