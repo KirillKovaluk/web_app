@@ -20,8 +20,6 @@ export default {
   computed: {
   },
   methods: {
-    testFoo() {
-    }
   },
 }
 </script>

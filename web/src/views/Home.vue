@@ -8,14 +8,11 @@
 
 <script>
 
-//import LotCard from '../components/LotCard'
-
 export default {
   components: {
   },
   data() {
     return {
-      cardArray: ['a', 'b', 'c', 'd', 'e'],
     }
   },
   watch: { 
