@@ -1,0 +1,60 @@
+﻿using Microsoft.EntityFrameworkCore.Migrations;
+using System.Text;
+
+#nullable disable
+
+namespace api.Migrations
+{
+    public partial class Init : Migration
+    {
+        protected override void Up(MigrationBuilder migrationBuilder)
+        {
+            // Lots
+
+            StringBuilder stringBuilder = new StringBuilder();
+
+            string usersSQL = @"
+INSERT INTO `auction`.`users` (`Id`, `Name`, `Email`, `Password`, `Balance`) 
+VALUES 
+('1', '123', '123', '3C9909AFEC25354D551DAE21590BB26E38D53F2173B8D3DC3EEE4C047E7AB1C1EB8B85103E3BE7BA613B31BB5C9C36214DC9F14A42FD7A2FDB84856BCA5C44C2', '500'),
+('2', '1', '1', '3C9909AFEC25354D551DAE21590BB26E38D53F2173B8D3DC3EEE4C047E7AB1C1EB8B85103E3BE7BA613B31BB5C9C36214DC9F14A42FD7A2FDB84856BCA5C44C2', '200'),
+('3', '2', '2', '3C9909AFEC25354D551DAE21590BB26E38D53F2173B8D3DC3EEE4C047E7AB1C1EB8B85103E3BE7BA613B31BB5C9C36214DC9F14A42FD7A2FDB84856BCA5C44C2', '500'),
+('4', '3', '3', '3C9909AFEC25354D551DAE21590BB26E38D53F2173B8D3DC3EEE4C047E7AB1C1EB8B85103E3BE7BA613B31BB5C9C36214DC9F14A42FD7A2FDB84856BCA5C44C2', '600')
+;
+";
+
+            string lotsSQL = @"
+INSERT INTO `auction`.`lots` (`Id`, `Name`, `Description`, `PriceStart`, `PriceResult`, `DateStart`, `DateEnd`, `Hours`, `LotStatus`, `LotType`, `UserCreatedId`) 
+VALUES 
+('1', '13dsfg', '1212312', '2.00', null, '2018-05-25 00:00:00.00', '2019-05-25 00:00:00.00', '2', '1', '0', '1'),
+('2', '13dsfg', '1212313', '1.00', null, '2018-05-25 00:00:00.00', '2019-05-25 00:00:00.00', '2', '1', '0', '1'),
+('3', '13dsfg', '121222d', '6.00', null, '2018-05-25 00:00:00.00', '2019-05-25 00:00:00.00', '2', '1', '0', '1'),
+('4', '13dsfg', '1241231', '3.00', null, '2018-05-25 00:00:00.00', '2019-05-25 00:00:00.00', '2', '1', '0', '2'),
+('5', '13dsfg', '12234dd', '6.00', null, '2018-05-25 00:00:00.00', '2019-05-25 00:00:00.00', '2', '1', '0', '2'),
+('6', '13dsfg', '121241d', '6.00', null, '2018-05-25 00:00:00.00', '2019-05-25 00:00:00.00', '2', '1', '0', '1'),
+('7', '13dsfg', '12sadfd', '4.00', null, '2018-05-25 00:00:00.00', '2019-05-25 00:00:00.00', '2', '1', '0', '1'),
+('8', '13dsfg', '12asddd', '2.00', null, '2018-05-25 00:00:00.00', '2019-05-25 00:00:00.00', '2', '1', '0', '1'),
+('9', '13dsfg', '12asdfd', '6.00', null, '2018-05-25 00:00:00.00', '2019-05-25 00:00:00.00', '2', '1', '0', '1'),
+('10', '13dsfg', '12addd', '8.00', null, '2018-05-25 00:00:00.00', '2019-05-25 00:00:00.00', '2', '0', '0', '1'),
+('11', '13dsfg', '1asdf2', '9.00', null, '2018-05-25 00:00:00.00', '2019-05-25 00:00:00.00', '2', '0', '0', '1'),
+('12', '13dsfg', '1asdf2', '1.00', null, '2018-05-25 00:00:00.00', '2019-05-25 00:00:00.00', '2', '0', '0', '1'),
+('13', '13dsfg', 'asf12', '11.00', null, '2018-05-25 00:00:00.00', '2019-05-25 00:00:00.00', '2', '0', '0', '1'),
+('14', '13dsfg', '1asdd2', '5.00', null, '2018-05-25 00:00:00.00', '2019-05-25 00:00:00.00', '2', '0', '0', '1'),
+('15', '13dsfg', '1sdfg2', '5.00', null, '2018-05-25 00:00:00.00', '2019-05-25 00:00:00.00', '2', '0', '0', '1'),
+('16', '13dsfg', '1dsfg2', '6.00', null, '2018-05-25 00:00:00.00', '2019-05-25 00:00:00.00', '2', '0', '0', '1')
+;
+";
+
+            stringBuilder.AppendLine(usersSQL);
+            stringBuilder.AppendLine(lotsSQL);
+
+
+            migrationBuilder.Sql(stringBuilder.ToString());
+        }
+
+        protected override void Down(MigrationBuilder migrationBuilder)
+        {
+
+        }
+    }
+}

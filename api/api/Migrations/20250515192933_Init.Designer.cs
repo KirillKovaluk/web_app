@@ -12,8 +12,8 @@ using api.DataContext;
 namespace api.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20250514174240_Create")]
-    partial class Create
+    [Migration("20250515192933_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,42 @@ namespace api.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
+
+            modelBuilder.Entity("api.Models.FileImage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Guid")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<int?>("LotId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Path")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LotId");
+
+                    b.ToTable("FileImages", (string)null);
+                });
 
             modelBuilder.Entity("api.Models.Lot", b =>
                 {
@@ -85,6 +121,9 @@ namespace api.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<decimal>("Balance")
+                        .HasColumnType("decimal(65,30)");
+
                     b.Property<string>("Email")
                         .HasColumnType("longtext");
 
@@ -97,6 +136,15 @@ namespace api.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users", (string)null);
+                });
+
+            modelBuilder.Entity("api.Models.FileImage", b =>
+                {
+                    b.HasOne("api.Models.Lot", "Lot")
+                        .WithMany("FileImages")
+                        .HasForeignKey("LotId");
+
+                    b.Navigation("Lot");
                 });
 
             modelBuilder.Entity("api.Models.Lot", b =>
@@ -114,6 +162,11 @@ namespace api.Migrations
                     b.Navigation("UserBought");
 
                     b.Navigation("UserCreated");
+                });
+
+            modelBuilder.Entity("api.Models.Lot", b =>
+                {
+                    b.Navigation("FileImages");
                 });
 
             modelBuilder.Entity("api.Models.User", b =>

@@ -2,6 +2,11 @@
 {
     public class Lot
     {
+        public Lot()
+        {
+            FileImages = new HashSet<FileImage>();
+        }
+
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
@@ -18,5 +23,7 @@
 
         public int? UserBoughtId { get; set; }
         public User UserBought { get; set; }
+
+        public ICollection<FileImage> FileImages { get; set; }
     }
 }
