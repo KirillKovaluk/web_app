@@ -17,18 +17,18 @@ namespace api.Services
             _context = context;
         }
 
-        public async Task<IEnumerable<LotView>> GetLotsPublicAsync()
+        public async Task<IEnumerable<LotPublicView>> GetLotsPublicAsync()
         {
             var lots = await _context.Lots
                 .Include(x => x.UserCreated)
                 .Include(x => x.UserBought)
                 .ToListAsync();
 
-            List<LotView> lotsView = new List<LotView>();
+            List<LotPublicView> lotsView = new List<LotPublicView>();
 
             foreach (var lot in lots)
             {
-                LotView lotView = lot.ToView();
+                LotPublicView lotView = lot.ToView();
                 lotsView.Add(lotView);
             }
 

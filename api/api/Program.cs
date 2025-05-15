@@ -2,6 +2,9 @@ using api.DataContext;
 using Microsoft.EntityFrameworkCore;
 using api.Services;
 using api.Controllers.Filters;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace api
 {
@@ -10,6 +13,24 @@ namespace api
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            builder.Services.AddAuthentication(x =>
+            {
+                x.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+                .AddJwtBearer(config =>
+                {
+                    config.RequireHttpsMetadata = false;
+                    config.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateAudience = false,
+                        ValidateIssuer = false,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Authorization:Key"]))
+                    };
+                });
+
 
             // Add services to the container
             builder.Services.AddMvc(options =>
@@ -23,11 +44,12 @@ namespace api
 
             // Add services .AddTransient .AddSingleton .AddScoped
             builder.Services
+                .AddTransient<IHttpContextAccessor, HttpContextAccessor>()
                 .AddScoped<IErrorService, ErrorService>()
                 .AddSingleton<IJWTService, JWTService>()
                 .AddScoped<ILotService, LotService>()
                 .AddScoped<IUserService, UserService>()
-
+                .AddScoped<IUserContext, UserContext>()
                 ;
 
             builder.Services.AddControllers();

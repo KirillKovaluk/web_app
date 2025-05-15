@@ -2,7 +2,7 @@
 
 namespace api.Services
 {
-    public class LotView
+    public class LotPublicView
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -16,17 +16,17 @@ namespace api.Services
         public LotType LotType { get; set; }
 
         public int UserCreatedId { get; set; }
-        public UserView UserCreated { get; set; }
+        public UserPublicView UserCreated { get; set; }
 
         public int? UserBoughtId { get; set; }
-        public UserView UserBought { get; set; }
+        public UserPublicView UserBought { get; set; }
     }
 
     public static class LotViewExtension
     {
-        public static LotView ToView(this Lot lot)
+        public static LotPublicView ToView(this Lot lot)
         {
-            var lotView = new LotView
+            var lotView = new LotPublicView
             {
                 Id = lot.Id,
                 Name = lot.Name,
@@ -43,11 +43,11 @@ namespace api.Services
                 UserBoughtId = lot.UserBoughtId
             };
 
-            lotView.UserCreated = lot.UserCreated.ToView();
+            lotView.UserCreated = lot.UserCreated.ToPublicView();
 
             if (lot.UserBought != null)
             {
-                lotView.UserBought = lot.UserBought.ToView();
+                lotView.UserBought = lot.UserBought.ToPublicView();
             }
 
             return lotView;

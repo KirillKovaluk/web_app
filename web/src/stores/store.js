@@ -31,5 +31,8 @@ export const useStore = defineStore('store', {
     getUser() {
       return this.user;
     },
+    getToken() {
+      return this.token;
+    },    
   },
 });

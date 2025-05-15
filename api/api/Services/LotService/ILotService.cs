@@ -2,6 +2,6 @@
 {
     public interface ILotService
     {
-        Task<IEnumerable<LotView>> GetLotsPublicAsync();
+        Task<IEnumerable<LotPublicView>> GetLotsPublicAsync();
     }
 }

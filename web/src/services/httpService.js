@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { useStore } from '@/stores/store';
 
 const API_URL = 'https://localhost:7245/';
 
@@ -12,7 +13,8 @@ export default function api(apiConfig) {
     'Accept': 'application/json;charset=UTF-8',
     'Content-Type': 'application/json;charset=UTF-8',
   };
-  let token = null;
+  const store = useStore(); 
+  let token = store.getToken();
   if (token) {
     headers.Authorization = `Bearer ${token}`;
   }

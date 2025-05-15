@@ -7,7 +7,8 @@ namespace api.Services
         public int Id { get; set; }
         public string? Name { get; set; }
         public string? Email { get; set; }
-        
+        public decimal Balance { get; set; }
+
         public string? Token { get; set; }
     }
 
@@ -20,6 +21,7 @@ namespace api.Services
                 Id = user.Id,
                 Name = user.Name,
                 Email = user.Email,
+                Balance = user.Balance,
                 Token = token
             };
 

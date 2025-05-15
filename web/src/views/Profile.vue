@@ -6,16 +6,22 @@
     <div class="text-center margin-top-10">
       <span>Information</span>
     </div>
-    <div class="text-center margin-top-10">
-      <span>Name:&nbsp;</span>
-      <span>{{ user.name }}</span>
+    <div v-if="user">
+      <div class="text-center margin-top-10">
+        <span>Name:</span>
+        <span class="margin-left-5">{{ user.name }}</span>
+      </div>
+      <div class="text-center margin-top-10">
+        <span>Balance:</span>
+        <span class="margin-left-5">{{ user.balance }}</span>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 
-import { useStore } from '@/stores/store';
+import { userController } from '@/services/apiService';
 
 export default {
   components: {
@@ -34,8 +40,14 @@ export default {
   },
   methods: {
     start() {
-      const store = useStore();
-      this.user = store.getUser();
+      userController.getUserAsyncHttpGet()
+      .then((data) => {
+        this.user = data;
+      })
+      .catch((e) => {
+        console.log(e);
+      })
+      ;
     },
   },
 }

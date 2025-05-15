@@ -9,14 +9,19 @@ namespace api.Services
         private readonly IErrorService _errorService;
         private readonly Context _context;
         private readonly IJWTService _jWTService;
+        private readonly IUserContext _userContext;
+
         public UserService(
             IErrorService errorService,
             Context context,
-            IJWTService jWTService) 
+            IJWTService jWTService,
+            IUserContext userContext
+            ) 
         {
             _errorService = errorService;
             _context = context;
             _jWTService = jWTService;
+            _userContext = userContext;
         }
 
         public async Task CreateUserAsync(UserCreateInput userCreateInput)
@@ -85,6 +90,21 @@ namespace api.Services
             var token = GetToken(user);
 
             return user.ToView(token);
+        }
+
+        public async Task<UserView> GetUserAsync()
+        {
+            var user = await _context.Users
+                .AsNoTracking()
+                .FirstOrDefaultAsync(x => x.Id == _userContext.UserId);
+
+            if (user == null)
+            {
+                _errorService.Add(ErrorCode.USER_NOT_FOUND);
+                return null;
+            }
+
+            return user.ToView();
         }
 
         #region Private Methods

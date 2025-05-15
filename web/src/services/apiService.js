@@ -23,4 +23,8 @@ export const userController = {
         password,
       });
   },
+  getUserAsyncHttpGet: function (){
+    return api({url: 'user/get-user'})
+      .get();
+  },
 };

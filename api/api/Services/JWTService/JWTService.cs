@@ -3,6 +3,7 @@ using System.Text;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Cryptography;
+using System.Security.Claims;
 
 namespace api.Services
 {
@@ -34,10 +35,17 @@ namespace api.Services
 
         public string GetToken(User user)
         {
+            List<Claim> claims = new List<Claim>();
+
+            var claim = new Claim(ClaimTypes.Name, user.Id.ToString());
+
+            claims.Add(claim);
+
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_configuration["Authorization:Key"]);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
+                Subject = new ClaimsIdentity(claims),
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
