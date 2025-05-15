@@ -1,10 +1,13 @@
 import api from './httpService'
 
-export const userController = {
-  getTestAsyncHttpGet: function (){
-    return api({url: 'user/get-test'})
+export const lotController = {
+  getLotsPublicAsyncHttpGet: function (){
+    return api({url: 'lot/get-lots-public'})
       .get();
   },
+};
+
+export const userController = {
   createUserAsyncHttpPost: function (name, email, password){
     return api({url: 'user/create-user'})
       .post({

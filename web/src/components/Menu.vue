@@ -123,6 +123,7 @@ export default {
   text-align: right;
 }
 .stile-button {
+  user-select: none;
   min-width: 60px;
   text-align: center;
   cursor: pointer;
