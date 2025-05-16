@@ -1,6 +1,6 @@
 <template>
   <div class="page-background">
-    <div class="home-container">
+    <div class="home-container margin-top-30">
       <h1>Добро пожаловать на AuctionService!</h1>
       <p>
         AuctionService — это безопасная и удобная платформа для онлайн-аукционов,
@@ -42,19 +42,9 @@ export default {
 
 <style scoped>
 .page-background {
-  min-height: 100vh;
-  background: #c1e6c1;
-  background: linear-gradient(
-    90deg,
-    rgba(193, 230, 193, 1) 3%,
-    rgba(142, 212, 145, 1) 14%,
-    rgba(178, 237, 198, 1) 36%,
-    rgba(118, 130, 111, 1) 100%
-  );
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 32px;
 }
 
 .home-container {
