@@ -1,28 +1,30 @@
 <template>
-  <div class="outer-container">
-    <div class="login-field">
-      <h2>Login</h2>
-      <div class="input-column">
+  <div class="page-background">
+    <div class="outer-container">
+      <div class="login-field">
+        <h2>Login</h2>
+        <div class="input-column">
+          <div>
+            <span>Name</span>
+          </div>
+          <div class="margin-top-4">
+            <input v-model="name" type="text" placeholder="Enter name" />
+          </div>
+        </div>
+        <div class="input-column">
+          <div>
+            <span>Password</span>
+          </div>
+          <div class="margin-top-4">
+            <input v-model="password" type="password" placeholder="Enter password" />
+          </div>
+        </div>
         <div>
-          <span>Name</span>
+          <button @click="login" :disabled="loginError" class="login-button">Login</button>
         </div>
-        <div class="margin-top-4">
-          <input v-model="name" type="text" placeholder="Enter name" />
+        <div class="margin-top-10 message">
+          <span v-show="isErrorMessege">test</span>
         </div>
-      </div>
-      <div class="input-column">
-        <div>
-          <span>Password</span>
-        </div>
-        <div class="margin-top-4">
-          <input v-model="password" type="password" placeholder="Enter password" />
-        </div>
-      </div>
-      <div>
-        <button @click="login" :disabled="loginError" class="login-button">Login</button>
-      </div>
-      <div class="margin-top-10 message">
-        <span v-show="isErrorMessege">test</span>
       </div>
     </div>
   </div>
@@ -73,6 +75,17 @@ export default {
 </script>
 
 <style scoped>
+.page-background {
+  min-height: 100vh;
+  background: #c1e6c1;
+  background: linear-gradient(
+    90deg,
+    rgba(193, 230, 193, 1) 3%,
+    rgba(142, 212, 145, 1) 14%,
+    rgba(178, 237, 198, 1) 36%,
+    rgba(118, 130, 111, 1) 100%
+  );
+}
 .outer-container {
   display: flex;
   justify-content: center;

@@ -4,7 +4,7 @@
 
       <div class="nav-left">
         <div @click="home" class="stile-button">
-          <span class="navbar-text">Auction</span>
+          <span class="navbar-text">AuctionService</span>
         </div>
         <div @click="about" class="stile-button margin-left-20">
           <span class="navbar-text">About</span>
@@ -124,7 +124,7 @@ export default {
 }
 .stile-button {
   user-select: none;
-  min-width: 60px;
+  min-width: 70px;
   text-align: center;
   cursor: pointer;
   background: linear-gradient(90deg, rgba(9, 133, 9, 1) 0%, rgba(20, 143, 71, 1) 50%, rgba(72, 179, 14, 1) 100%);
