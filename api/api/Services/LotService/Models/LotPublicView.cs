@@ -14,6 +14,7 @@ namespace api.Services
         public int Hours { get; set; }
         public LotStatus LotStatus { get; set; }
         public LotType LotType { get; set; }
+        public decimal? PriceBet { get; set; }
 
         public int UserCreatedId { get; set; }
         public UserPublicView UserCreated { get; set; }
@@ -38,6 +39,7 @@ namespace api.Services
                 Hours = lot.Hours,
                 LotStatus = lot.LotStatus,
                 LotType = lot.LotType,
+                PriceBet = lot.PriceBet,
 
                 UserCreatedId = lot.UserCreatedId,
                 UserBoughtId = lot.UserBoughtId

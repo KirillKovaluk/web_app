@@ -13,6 +13,21 @@ export const lotController = {
     return api({url: 'lot/get-lots-bought'})
       .get();
   },
+  createLotAsyncHttpPost: function (name, description, priceStart, hours){
+    return api({url: 'lot/crate-lot'})
+      .post({
+        name,
+        description,
+        priceStart,
+        hours,
+      });
+  },
+  betLotAsyncHttpPost: function (id){
+    return api({url: 'lot/bet-lot'})
+      .post({
+        id,
+      });
+  },
 };
 
 export const userController = {

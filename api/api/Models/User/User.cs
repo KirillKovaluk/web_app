@@ -6,6 +6,7 @@
         {
             LotsCreated = new HashSet<Lot>();
             LotsBought = new HashSet<Lot>();
+            LotsBet = new HashSet<Lot>();
         }
 
         public int Id { get; set; }
@@ -16,5 +17,6 @@
 
         public ICollection<Lot> LotsCreated { get; set; }
         public ICollection<Lot> LotsBought { get; set; }
+        public ICollection<Lot> LotsBet { get; set; }
     }
 }

@@ -17,12 +17,17 @@
         public int Hours { get; set; }
         public LotStatus LotStatus { get; set; }
         public LotType LotType { get; set; }
+        public DateTime DateCreated { get; set; }
+        public decimal? PriceBet { get; set; }
 
         public int UserCreatedId { get; set; }
         public User UserCreated { get; set; }
 
         public int? UserBoughtId { get; set; }
         public User UserBought { get; set; }
+
+        public int? UserBetId { get; set; }
+        public User UserBet { get; set; }
 
         public ICollection<FileImage> FileImages { get; set; }
     }

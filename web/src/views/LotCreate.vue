@@ -54,6 +54,8 @@
 
 <script>
 
+import { lotController } from '@/services/apiService';
+
 export default {
   components: {
   },
@@ -86,7 +88,10 @@ export default {
   },
   methods: {
     createLot() {
-
+      lotController.createLotAsyncHttpPost(this.name, this.description, this.priceStart, this.hours)
+      .then(() => {
+        this.$router.push('/lots-user-created');
+      })
     },
   },
 }

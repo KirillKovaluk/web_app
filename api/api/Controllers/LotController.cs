@@ -40,5 +40,23 @@ namespace api.Controllers
             var vm = await _lotService.GetLotsBoughtAsync();
             return Ok(vm);
         }
+
+        [HttpPost(Name = "CreateLotAsync")]
+        [Route("crate-lot")]
+        [Authorize]
+        public async Task<IActionResult> CreateLotAsync(LotCreateInput lotCreateInput)
+        {
+            await _lotService.CreateLotAsync(lotCreateInput);
+            return Ok();
+        }
+
+        [HttpPost(Name = "BetLotAsync")]
+        [Route("bet-lot")]
+        [Authorize]
+        public async Task<IActionResult> BetLotAsync(LotBetInput lotBetInput)
+        {
+            await _lotService.BetLotAsync(lotBetInput);
+            return Ok();
+        }
     }
 }

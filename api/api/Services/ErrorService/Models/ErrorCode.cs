@@ -8,5 +8,7 @@
         USER_NOT_FOUND = 4,
         DATA_NOT_FOUND = 5,
         ITEM_ALREADY_EXISTS = 6,
+        ACTION_IS_INVALID = 7,
+        NO_MONEY_FOR_BET = 8,
     }
 }

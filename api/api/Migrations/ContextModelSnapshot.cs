@@ -66,6 +66,9 @@ namespace api.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime(6)");
+
                     b.Property<DateTime>("DateEnd")
                         .HasColumnType("datetime(6)");
 
@@ -89,11 +92,17 @@ namespace api.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<decimal?>("PriceBet")
+                        .HasColumnType("decimal(65,30)");
+
                     b.Property<decimal?>("PriceResult")
                         .HasColumnType("decimal(65,30)");
 
                     b.Property<decimal>("PriceStart")
                         .HasColumnType("decimal(65,30)");
+
+                    b.Property<int?>("UserBetId")
+                        .HasColumnType("int");
 
                     b.Property<int?>("UserBoughtId")
                         .HasColumnType("int");
@@ -102,6 +111,8 @@ namespace api.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("UserBetId");
 
                     b.HasIndex("UserBoughtId");
 
@@ -146,6 +157,10 @@ namespace api.Migrations
 
             modelBuilder.Entity("api.Models.Lot", b =>
                 {
+                    b.HasOne("api.Models.User", "UserBet")
+                        .WithMany("LotsBet")
+                        .HasForeignKey("UserBetId");
+
                     b.HasOne("api.Models.User", "UserBought")
                         .WithMany("LotsBought")
                         .HasForeignKey("UserBoughtId");
@@ -155,6 +170,8 @@ namespace api.Migrations
                         .HasForeignKey("UserCreatedId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("UserBet");
 
                     b.Navigation("UserBought");
 
@@ -168,6 +185,8 @@ namespace api.Migrations
 
             modelBuilder.Entity("api.Models.User", b =>
                 {
+                    b.Navigation("LotsBet");
+
                     b.Navigation("LotsBought");
 
                     b.Navigation("LotsCreated");

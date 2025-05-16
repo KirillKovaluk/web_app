@@ -28,6 +28,11 @@ namespace api.DataContext
                 .WithMany(x => x.LotsBought)
                 .HasForeignKey(x => x.UserBoughtId);
 
+            modelBuilder.Entity<Lot>()
+                .HasOne(x => x.UserBet)
+                .WithMany(x => x.LotsBet)
+                .HasForeignKey(x => x.UserBetId);
+
             modelBuilder.Entity<Lot>().ToTable(nameof(Lots));
 
             modelBuilder.Entity<FileImage>()

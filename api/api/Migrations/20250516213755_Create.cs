@@ -52,12 +52,20 @@ namespace api.Migrations
                     Hours = table.Column<int>(type: "int", nullable: false),
                     LotStatus = table.Column<int>(type: "int", nullable: false),
                     LotType = table.Column<int>(type: "int", nullable: false),
+                    DateCreated = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    PriceBet = table.Column<decimal>(type: "decimal(65,30)", nullable: true),
                     UserCreatedId = table.Column<int>(type: "int", nullable: false),
-                    UserBoughtId = table.Column<int>(type: "int", nullable: true)
+                    UserBoughtId = table.Column<int>(type: "int", nullable: true),
+                    UserBetId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Lots", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Lots_Users_UserBetId",
+                        column: x => x.UserBetId,
+                        principalTable: "Users",
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Lots_Users_UserBoughtId",
                         column: x => x.UserBoughtId,
@@ -103,6 +111,11 @@ namespace api.Migrations
                 name: "IX_FileImages_LotId",
                 table: "FileImages",
                 column: "LotId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Lots_UserBetId",
+                table: "Lots",
+                column: "UserBetId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Lots_UserBoughtId",

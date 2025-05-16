@@ -29,6 +29,14 @@
               <span>Description:</span>
               <span class="margin-left-5">{{ lot.description }}</span>
             </div>
+            <div>
+              <span>Price bet:</span>
+              <span v-if="lot.priceBet" class="margin-left-5">{{ lot.priceBet }}</span>
+              <span v-else class="margin-left-5">No bets</span>
+            </div>
+            <div class="margin-top-10">
+              <button @click="createBet(lot.id)" class="stile-button button-create">Place a bet</button>
+            </div>
           </div>
         </div>
       </div>
@@ -62,6 +70,12 @@ export default {
         this.lots = data;
       });
     },
+    createBet(id){
+      lotController.betLotAsyncHttpPost(id)
+      .then(() => {
+        this.init();
+      });
+    },
   },
 }
 </script>
@@ -73,4 +87,7 @@ export default {
   color: #168518;
 }
 
+.button-create {
+ min-width: 120px;
+}
 </style>
