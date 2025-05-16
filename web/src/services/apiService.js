@@ -5,6 +5,14 @@ export const lotController = {
     return api({url: 'lot/get-lots-public'})
       .get();
   },
+  getLotsCreatedAsyncHttpGet: function (){
+    return api({url: 'lot/get-lots-created'})
+      .get();
+  },
+  getLotsBoughtAsyncHttpGet: function (){
+    return api({url: 'lot/get-lots-bought'})
+      .get();
+  },
 };
 
 export const userController = {

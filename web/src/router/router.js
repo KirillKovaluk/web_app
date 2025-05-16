@@ -7,7 +7,8 @@ import Login from '../views/Login'
 
 import LotCreate from '../views/LotCreate'
 import Lots from '../views/Lots'
-import LotsUser from '../views/LotsUser'
+import LotsUserCreated from '../views/LotsUserCreated'
+import LotsUserBought from '../views/LotsUserBought'
 
 import Profile from '../views/Profile'
 import Registration from '../views/Registration'
@@ -22,8 +23,9 @@ const router = createRouter({
 
     { path: '/lot-create', name: 'LotCreate', component: LotCreate, meta: { type: RouteType.authorized } },
     { path: '/lots', name: 'Lots', component: Lots, meta: { type: RouteType.default } },
-    { path: '/lots-user', name: 'LotsUser', component: LotsUser, meta: { type: RouteType.authorized } },
-
+    { path: '/lots-user-created', name: 'LotsUserCreated', component: LotsUserCreated, meta: { type: RouteType.authorized } },
+    { path: '/lots-user-bought', name: 'LotsUserBought', component: LotsUserBought, meta: { type: RouteType.authorized } },
+    
     { path: '/profile', name: 'Profile', component: Profile, meta: { type: RouteType.authorized }},
     { path: '/registration', name: 'Registration', component: Registration, meta: { type: RouteType.unauthorized } },
   ]

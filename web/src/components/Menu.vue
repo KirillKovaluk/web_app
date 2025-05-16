@@ -13,9 +13,12 @@
         <div @click="lots" class="stile-button margin-left-20">
           <span class="navbar-text">Lots</span>
         </div>
-        <div v-if="isAuthorized" @click="lotsUser" class="stile-button margin-left-20">
-          <span class="navbar-text">My Lots</span>
-        </div>        
+        <div v-if="isAuthorized" @click="lotsUserCreated" class="stile-button margin-left-20">
+          <span class="navbar-text">Lots created</span>
+        </div>
+        <div v-if="isAuthorized" @click="lotsUserBought" class="stile-button margin-left-20">
+          <span class="navbar-text">Lots bought</span>
+        </div>    
       </div>
 
       <div class="nav-right">
@@ -73,8 +76,11 @@ export default {
     lots() {
       this.$router.push('/lots');
     },
-    lotsUser() {
-      this.$router.push('/lots-user');
+    lotsUserCreated() {
+      this.$router.push('/lots-user-created');
+    },
+    lotsUserBought() {
+      this.$router.push('/lots-user-bought');
     },
     registration() {
       this.$router.push('/registration');

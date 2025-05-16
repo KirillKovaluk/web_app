@@ -8,13 +8,16 @@ namespace api.Services
     {
         private readonly IErrorService _errorService;
         private readonly Context _context;
+        private readonly IUserContext _userContext;
 
         public LotService(
             IErrorService errorService,
-            Context context) 
+            Context context,
+            IUserContext userContext) 
         {
             _errorService = errorService;
             _context = context;
+            _userContext = userContext;
         }
 
         public async Task<IEnumerable<LotPublicView>> GetLotsPublicAsync()
@@ -35,6 +38,27 @@ namespace api.Services
             //return lots.Select(lot => lot.ToView());
 
             return lotsView;
+        }
+
+        public async Task<IEnumerable<LotUserView>> GetLotsCreatedAsync()
+        {
+            var lots = await _context.Lots
+                .Include(x => x.UserCreated)
+                .Include(x => x.UserBought)
+                .Where(x => x.UserCreated.Id == _userContext.UserId)
+                .ToListAsync();
+
+            return lots.Select(lot => lot.ToUserView());
+        }
+        public async Task<IEnumerable<LotUserView>> GetLotsBoughtAsync()
+        {
+            var lots = await _context.Lots
+                .Include(x => x.UserCreated)
+                .Include(x => x.UserBought)
+                .Where(x => x.UserBought.Id == _userContext.UserId)
+                .ToListAsync();
+
+            return lots.Select(lot => lot.ToUserView());
         }
     }
 }
