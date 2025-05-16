@@ -21,7 +21,7 @@ namespace api.Services
         {
             var lots = await _context.Lots
                 .Include(x => x.UserCreated)
-                .Include(x => x.UserBought)
+                .Where(x => x.LotStatus == LotStatus.ACTIVE)
                 .ToListAsync();
 
             List<LotPublicView> lotsView = new List<LotPublicView>();

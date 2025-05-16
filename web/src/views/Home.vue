@@ -13,8 +13,8 @@
       <p>
         Зарегистрируйтесь сейчас и создайте свой первый аукцион!
       </p>
-      <div class>
-        <button @click="goToAuction">Перейти к просмотру лотов</button>
+      <div class="margin-top-30">
+        <button @click="goToAuction" class="stile-button">Перейти к просмотру лотов</button>
       </div>
     </div>
   </div>
@@ -73,23 +73,5 @@ p {
   max-width: 600px;
   margin-bottom: 1.20px;
   line-height: 1.6;
-}
-
-button {
-  margin-top: 30px;
-  padding: 14px 24px;
-  font-size: 16px;
-  background-color: #66bb6a;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  box-shadow: 0 4px 10px rgba(102, 187, 106, 0.3);
-  transition: background 0.3s ease, transform 0.2s ease;
-}
-
-button:hover {
-  background-color: #57a05d;
-  transform: translateY(-2px);
 }
 </style>

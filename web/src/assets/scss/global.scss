@@ -1,6 +1,7 @@
 .text-center {
   text-align: center;
 }
+
 .margin-top-4 {
   margin-top: 4px;
 }
@@ -10,20 +11,96 @@
 .margin-top-30 {
   margin-top: 30px;
 }
+.margin-left-5 {
+  margin-left: 5px;
+}
 .margin-left-20 {
   margin-left: 20px;
 }
 .margin-right-20 {
   margin-right: 20px;
 }
-.margin-left-5 {
-  margin-left: 5px;
-}
+
+
 .front-veight-700 {
   font-weight: 700;
 }
 .front-size-22 {
  font-size: 22px;
+}
+
+
+.stile-button {
+  user-select: none;
+  min-width: 70px;
+  text-align: center;
+  cursor: pointer;
+  background: linear-gradient(90deg, rgba(9, 133, 9, 1) 0%, rgba(20, 143, 71, 1) 50%, rgba(72, 179, 14, 1) 100%);
+  border: none;
+  color: white;
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 16px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  &:hover {
+    background-color: #28a745;
+    transform: translateY(-2px);
+  }
+  &:focus {
+    outline: none;
+  }
+  &:disabled {
+    background: #b4c2b4;
+    background: linear-gradient(90deg, rgba(180, 194, 180, 1) 0%, rgba(95, 110, 100, 1) 50%, rgba(118, 130, 111, 1) 100%);
+    transition: none;
+    transform: none;
+  }
+}
+
+
+.lot-block {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+.lot-card {
+  padding: 12px 16px;
+  border-radius: 6px;
+  border-style: groove;
+  border-color: #75df5d;
+  width: 600px;
+  height: 200px;
+  background: linear-gradient(135deg, #d8efd8, #b1e2b1);
+  box-shadow: 0 4px 10px rgba(113, 160, 113, 0.3);
+  color: #2e7d32;
+  font-size: 16px;
+  transition: box-shadow 0.3s ease;
+  &:hover {
+    box-shadow: 0 8px 20px rgba(46, 125, 50, 0.5);
+  }
+    
+  & div {
+    margin-bottom: 10px;
+  }
+  
+  &:first-child {
+    font-weight: 600;
+    color: #3a8f3a;
+  } 
+}
+.lots-page {
+  min-height: 100vh;
+  background: linear-gradient(
+    90deg,
+    rgba(193, 230, 193, 1) 3%,
+    rgba(142, 212, 145, 1) 14%,
+    rgba(178, 237, 198, 1) 36%,
+    rgba(118, 130, 111, 1) 100%
+  );
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 #app {

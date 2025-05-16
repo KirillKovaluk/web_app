@@ -122,24 +122,5 @@ export default {
 .right {
   text-align: right;
 }
-.stile-button {
-  user-select: none;
-  min-width: 70px;
-  text-align: center;
-  cursor: pointer;
-  background: linear-gradient(90deg, rgba(9, 133, 9, 1) 0%, rgba(20, 143, 71, 1) 50%, rgba(72, 179, 14, 1) 100%);
-  border: none;
-  color: white;
-  padding: 12px;
-  border-radius: 6px;
-  font-size: 16px;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-.stile-button:hover {
-  background-color: #28a745;
-  transform: translateY(-2px);
-}
-.stile-button:focus {
-  outline: none;
-}
+
 </style>
