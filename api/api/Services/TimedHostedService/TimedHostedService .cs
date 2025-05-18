@@ -1,4 +1,9 @@
-﻿namespace api.Services
+﻿using api.DataContext;
+using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
+using System;
+
+namespace api.Services
 {
     public class TimedHostedService : IHostedService, IDisposable
     {
@@ -8,10 +13,9 @@
 
         private readonly ILotBackgroundService _lotBackgroundService;
 
-        public TimedHostedService(ILogger<TimedHostedService> logger, ILotBackgroundService lotBackgroundService)
+        public TimedHostedService(ILogger<TimedHostedService> logger)
         {
             _logger = logger;
-            _lotBackgroundService = lotBackgroundService;
         }
 
         public Task StartAsync(CancellationToken stoppingToken)
@@ -19,7 +23,7 @@
             _logger.LogInformation("Timed Hosted Service running.");
 
             _timer = new Timer(DoWork, null, TimeSpan.Zero,
-                TimeSpan.FromSeconds(30));
+                TimeSpan.FromSeconds(10));
 
             return Task.CompletedTask;
         }
@@ -30,8 +34,25 @@
 
             _logger.LogInformation(
                 "Timed Hosted Service is working. Count: {Count}", count);
-            Task.Run(async () => {
-                await _lotBackgroundService.CloseLotBackgroundAsync();
+            Task.Run(async () => 
+            {
+                string appsettingsJson = null;
+
+                using (StreamReader sr = new StreamReader("appsettings.json"))
+                {
+                    appsettingsJson = sr.ReadToEnd();
+                }
+
+                AppSettings settings = JsonConvert.DeserializeObject<AppSettings>(appsettingsJson);
+
+                string connectionString = settings.ConnectionStrings.ConnectionString;
+
+                DbContextOptionsBuilder<Context> contextBuilder = new DbContextOptionsBuilder<Context>();
+                contextBuilder.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+                Context context = new Context(contextBuilder.Options);
+                ILotBackgroundService lotBackgroundService = new LotBackgroundService(context);
+
+                await lotBackgroundService.CloseLotBackgroundAsync();
             });
         }
 

@@ -46,7 +46,7 @@ namespace api
             builder.Services
                 .AddTransient<IHttpContextAccessor, HttpContextAccessor>()
                 .AddHostedService<TimedHostedService>()
-                .AddSingleton<ILotBackgroundService, LotBackgroundService>()
+                .AddScoped<ILotBackgroundService, LotBackgroundService>()
                 .AddScoped<IErrorService, ErrorService>()
                 .AddSingleton<IJWTService, JWTService>()
                 .AddScoped<ILotService, LotService>()
