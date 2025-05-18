@@ -1,7 +1,7 @@
 <template>
   <div class="lots-page">
     <div class="text-center margin-top-10 front-veight-700 front-size-22">
-      <span>My lots</span>
+      <span>Lots</span>
     </div>
     <div>
       <div class="text-center margin-top-10">

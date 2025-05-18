@@ -34,8 +34,9 @@ export default {
   computed: {
   },
   methods: {
-    testFoo() {
-    }
+    goToAuction() {
+      this.$router.push('/lots');
+    },
   },
 }
 </script>
