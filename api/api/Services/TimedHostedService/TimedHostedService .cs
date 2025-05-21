@@ -32,8 +32,8 @@ namespace api.Services
         {
             var count = Interlocked.Increment(ref executionCount);
 
-            _logger.LogInformation(
-                "Timed Hosted Service is working. Count: {Count}", count);
+            _logger.LogInformation("Timed Hosted Service is working. Count: {Count}", count);
+
             Task.Run(async () => 
             {
                 string appsettingsJson = null;
