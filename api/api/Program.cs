@@ -67,6 +67,14 @@ namespace api
                 app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             }
 
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                OnPrepareResponse = ctx =>
+                {
+                    ctx.Context.Response.Headers["Cache-Control"] = "public,max-age=" + 31557600;
+                }
+            });
+
             app.UseHttpsRedirection();
 
             app.UseAuthorization();

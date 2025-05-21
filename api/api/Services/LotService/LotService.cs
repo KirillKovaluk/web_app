@@ -1,6 +1,7 @@
 ﻿using api.DataContext;
 using Microsoft.EntityFrameworkCore;
 using api.Models;
+using System.IO;
 
 namespace api.Services
 {
@@ -10,14 +11,23 @@ namespace api.Services
         private readonly Context _context;
         private readonly IUserContext _userContext;
 
+        private readonly string _contentRootPath;
+
+        private const string Slash = "/";
+        private const string StaticRootFolder = "/wwwroot";
+        private const string FolderImages = "/images";
+
+
         public LotService(
             IErrorService errorService,
             Context context,
-            IUserContext userContext) 
+            IUserContext userContext,
+            IWebHostEnvironment webHostEnvironment) 
         {
             _errorService = errorService;
             _context = context;
             _userContext = userContext;
+            _contentRootPath = webHostEnvironment.ContentRootPath;
         }
 
         public async Task<IEnumerable<LotPublicView>> GetLotsPublicAsync()
@@ -69,7 +79,9 @@ namespace api.Services
 
         public async Task CreateLotAsync(LotCreateInput lotCreateInput)
         {
-            if (string.IsNullOrEmpty(lotCreateInput.Name) || string.IsNullOrEmpty(lotCreateInput.Description))
+            if (string.IsNullOrEmpty(lotCreateInput.Name)
+                || string.IsNullOrEmpty(lotCreateInput.Description)
+                || lotCreateInput.FormFile == null)
             {
                 _errorService.Add(ErrorCode.MODEL_IS_INVALID);
                 return;
@@ -89,6 +101,41 @@ namespace api.Services
             };
 
             _context.Lots.Add(lot);
+
+            var file = new FileImage
+            {
+                Name = lotCreateInput.Name,
+                Created = DateTime.UtcNow,
+                Type = FileImageType.IMAGE,
+                Lot = lot,
+            };
+
+            // save file
+            var baseFolder = _contentRootPath + StaticRootFolder;
+
+            if (!Directory.Exists(baseFolder))
+            {
+                Directory.CreateDirectory(baseFolder);
+            }
+
+            string guid = Guid.NewGuid().ToString();
+            string fileName = lotCreateInput.FormFile.FileName;
+            string fileType = fileName.Substring(fileName.LastIndexOf("."));
+
+            file.Guid = guid;
+
+            var path = baseFolder + FolderImages + Slash + guid + fileType;
+
+            using (var fileStream = new FileStream(path, FileMode.Create))
+            {
+                await lotCreateInput.FormFile.CopyToAsync(fileStream);
+            }
+
+            file.Path = path.Replace(baseFolder, string.Empty);
+
+            // ===
+
+            _context.FileImages.Add(file);
 
             await _context.SaveChangesAsync();
         }

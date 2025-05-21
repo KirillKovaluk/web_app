@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useStore } from '@/stores/store';
+import { ContentTypes } from '../consts/contentTypes'
 
 const API_URL = 'https://localhost:7245/';
 
@@ -9,10 +10,14 @@ function responseError(e) {
 
 export default function api(apiConfig) {
   let url = `${API_URL}${apiConfig.url}`;
-  let headers = { 
-    'Accept': 'application/json;charset=UTF-8',
-    'Content-Type': 'application/json;charset=UTF-8',
-  };
+  let contentType = apiConfig.contentType;
+
+  let headers = { 'Accept': 'application/json;charset=UTF-8' };
+  if (!contentType) {
+    contentType = ContentTypes.json;
+  }
+  headers['Content-Type'] = contentType;
+
   const store = useStore(); 
   let token = store.getToken();
   if (token) {

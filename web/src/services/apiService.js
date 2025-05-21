@@ -1,4 +1,5 @@
 import api from './httpService'
+import { ContentTypes } from '../consts/contentTypes'
 
 export const lotController = {
   getLotsPublicAsyncHttpGet: function (){
@@ -13,14 +14,14 @@ export const lotController = {
     return api({url: 'lot/get-lots-bought'})
       .get();
   },
-  createLotAsyncHttpPost: function (name, description, priceStart, hours){
-    return api({url: 'lot/crate-lot'})
-      .post({
-        name,
-        description,
-        priceStart,
-        hours,
-      });
+  createLotAsyncHttpPost: function (model){
+    let request = model.formFile || new FormData();
+    request.append('name', model.name);
+    request.append('description', model.description);
+    request.append('priceStart', model.priceStart);
+    request.append('hours', model.hours);
+    return api({ url: 'lot/create-lot', contentType: ContentTypes.formData  })
+      .post(request );
   },
   betLotAsyncHttpPost: function (id){
     return api({url: 'lot/bet-lot'})

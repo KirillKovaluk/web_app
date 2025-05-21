@@ -42,9 +42,9 @@ namespace api.Controllers
         }
 
         [HttpPost(Name = "CreateLotAsync")]
-        [Route("crate-lot")]
+        [Route("create-lot")]
         [Authorize]
-        public async Task<IActionResult> CreateLotAsync(LotCreateInput lotCreateInput)
+        public async Task<IActionResult> CreateLotAsync([FromForm] LotCreateInput lotCreateInput)
         {
             await _lotService.CreateLotAsync(lotCreateInput);
             return Ok();
