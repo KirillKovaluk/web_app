@@ -32,6 +32,11 @@
               <span>Description:</span>
               <span class="margin-left-5">{{ lot.description }}</span>
             </div>
+
+            <div v-if="lot.fileImages && lot.fileImages[0]" class="text-center">
+              <img :src="getImageUrl() + lot.fileImages[0].path" alt="" class="lot-image">
+            </div>
+
           </div>
         </div>
       </div>
@@ -42,6 +47,7 @@
 <script>
 
 import { lotController } from '@/services/apiService';
+import { getApiUrl } from '@/services/helperService'
 
 export default {
   components: {
@@ -49,6 +55,7 @@ export default {
   data() {
     return {
       lots: null,
+      image: null,
     }
   },
   created() {
@@ -67,6 +74,9 @@ export default {
     },
     createLot() {
       this.$router.push('/lot-create');
+    },
+    getImageUrl() {
+      return getApiUrl();
     },
   },
 }

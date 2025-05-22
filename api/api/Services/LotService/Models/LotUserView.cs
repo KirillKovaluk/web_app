@@ -15,6 +15,8 @@ namespace api.Services
         public LotStatus LotStatus { get; set; }
         public LotType LotType { get; set; }
 
+        public IEnumerable<FileImageView> FileImages { get; set; }
+
         public int UserCreatedId { get; set; }
         public UserPublicView UserCreated { get; set; }
 
@@ -40,8 +42,14 @@ namespace api.Services
                 LotType = lot.LotType,
 
                 UserCreatedId = lot.UserCreatedId,
-                UserBoughtId = lot.UserBoughtId
+                UserBoughtId = lot.UserBoughtId,
+                
             };
+
+            if ( lot.FileImages.Any()) 
+            {
+                lotView.FileImages = lot.FileImages.Select(x => x.ToUserView());
+            }
 
             if (lot.UserCreated != null)
             {

@@ -58,12 +58,14 @@ namespace api.Services
                 .AsNoTracking()
                 .Include(x => x.UserCreated)
                 .Include(x => x.UserBought)
+                .Include(x => x.FileImages)
                 .Where(x => x.UserCreated.Id == _userContext.UserId)
                 .OrderByDescending(x => x.DateCreated)
                 .ToListAsync();
 
             return lots.Select(lot => lot.ToUserView());
         }
+
         public async Task<IEnumerable<LotUserView>> GetLotsBoughtAsync()
         {
             var lots = await _context.Lots
@@ -104,7 +106,7 @@ namespace api.Services
 
             var file = new FileImage
             {
-                Name = lotCreateInput.Name,
+                Name = lotCreateInput.FormFile.FileName,
                 Created = DateTime.UtcNow,
                 Type = FileImageType.IMAGE,
                 Lot = lot,

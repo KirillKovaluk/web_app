@@ -1,15 +1,15 @@
 import axios from 'axios';
 import { useStore } from '@/stores/store';
 import { ContentTypes } from '../consts/contentTypes'
+import { getApiUrl } from '../services/helperService'
 
-const API_URL = 'https://localhost:7245/';
 
 function responseError(e) {
   return Promise.reject(e);
 }
 
 export default function api(apiConfig) {
-  let url = `${API_URL}${apiConfig.url}`;
+  let url = `${getApiUrl()}${apiConfig.url}`;
   let contentType = apiConfig.contentType;
 
   let headers = { 'Accept': 'application/json;charset=UTF-8' };
