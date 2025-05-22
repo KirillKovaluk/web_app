@@ -47,7 +47,7 @@
 <script>
 
 import { lotController } from '@/services/apiService';
-import { getApiUrl } from '@/services/helperService'
+import { getApiUrl } from '@/services/helperService';
 
 export default {
   components: {
@@ -55,7 +55,6 @@ export default {
   data() {
     return {
       lots: null,
-      image: null,
     }
   },
   created() {

@@ -16,7 +16,7 @@ namespace api.Services
 
     public static class FileImageViewExtension
     {
-        public static FileImageView ToUserView(this FileImage fileImage)
+        public static FileImageView ToView(this FileImage fileImage)
         {
             var fileImageView = new FileImageView
             {

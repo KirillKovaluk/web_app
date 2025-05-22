@@ -34,6 +34,11 @@
               <span v-if="lot.priceBet" class="margin-left-5">{{ lot.priceBet }}</span>
               <span v-else class="margin-left-5">No bets</span>
             </div>
+
+            <div v-if="lot.fileImages && lot.fileImages[0]" class="text-center">
+              <img :src="getImageUrl() + lot.fileImages[0].path" alt="" class="lot-image">
+            </div>
+            
             <div class="margin-top-10">
               <button @click="createBet(lot.id)" class="stile-button button-create">Place a bet</button>
             </div>
@@ -47,6 +52,7 @@
 <script>
 
 import { lotController } from '@/services/apiService';
+import { getApiUrl } from '@/services/helperService';
 
 export default {
   components: {
@@ -75,6 +81,9 @@ export default {
       .then(() => {
         this.init();
       });
+    },
+    getImageUrl() {
+      return getApiUrl();
     },
   },
 }

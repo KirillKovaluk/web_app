@@ -16,6 +16,8 @@ namespace api.Services
         public LotType LotType { get; set; }
         public decimal? PriceBet { get; set; }
 
+        public IEnumerable<FileImageView> FileImages { get; set; }
+
         public int UserCreatedId { get; set; }
         public UserPublicView UserCreated { get; set; }
 
@@ -44,6 +46,11 @@ namespace api.Services
                 UserCreatedId = lot.UserCreatedId,
                 UserBoughtId = lot.UserBoughtId
             };
+
+            if (lot.FileImages.Any())
+            {
+                lotView.FileImages = lot.FileImages.Select(x => x.ToView());
+            }
 
             lotView.UserCreated = lot.UserCreated.ToPublicView();
 

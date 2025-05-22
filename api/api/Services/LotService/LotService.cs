@@ -35,6 +35,7 @@ namespace api.Services
             var lots = await _context.Lots
                 .AsNoTracking()
                 .Include(x => x.UserCreated)
+                .Include(x => x.FileImages)
                 .Where(x => x.LotStatus == LotStatus.ACTIVE)
                 .OrderByDescending(x => x.DateCreated)
                 .ToListAsync();
@@ -72,6 +73,7 @@ namespace api.Services
                 .AsNoTracking()
                 .Include(x => x.UserCreated)
                 .Include(x => x.UserBought)
+                .Include (x => x.FileImages)
                 .Where(x => x.UserBought.Id == _userContext.UserId)
                 .OrderByDescending(x => x.DateCreated)
                 .ToListAsync();

@@ -48,7 +48,7 @@ namespace api.Services
 
             if ( lot.FileImages.Any()) 
             {
-                lotView.FileImages = lot.FileImages.Select(x => x.ToUserView());
+                lotView.FileImages = lot.FileImages.Select(x => x.ToView());
             }
 
             if (lot.UserCreated != null)
