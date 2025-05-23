@@ -15,11 +15,11 @@ namespace api.Controllers
             _lotService = lotService;
         }
 
-        [HttpGet(Name = "GetLotsPublicAsync")]
+        [HttpPost(Name = "GetLotsPublicAsync")]
         [Route("get-lots-public")]
-        public async Task<IActionResult> GetLotsPublicAsync()
+        public async Task<IActionResult> GetLotsPublicAsync(LotQueryInput lotQueryInput)
         {
-            var vm = await _lotService.GetLotsPublicAsync();
+            var vm = await _lotService.GetLotsPublicAsync(lotQueryInput);
             return Ok(vm);
         }
 

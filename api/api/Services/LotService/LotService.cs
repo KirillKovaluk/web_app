@@ -30,15 +30,22 @@ namespace api.Services
             _contentRootPath = webHostEnvironment.ContentRootPath;
         }
 
-        public async Task<IEnumerable<LotPublicView>> GetLotsPublicAsync()
+        public async Task<IEnumerable<LotPublicView>> GetLotsPublicAsync(LotQueryInput lotQueryInput)
         {
-            var lots = await _context.Lots
+            var lotsQuery = _context.Lots
                 .AsNoTracking()
                 .Include(x => x.UserCreated)
                 .Include(x => x.FileImages)
-                .Where(x => x.LotStatus == LotStatus.ACTIVE)
-                .OrderByDescending(x => x.DateCreated)
-                .ToListAsync();
+                .Where(x => x.LotStatus == LotStatus.ACTIVE);
+
+            if (lotQueryInput.LotType != LotType.NONE)
+            {
+                lotsQuery = lotsQuery.Where(x => x.LotType == lotQueryInput.LotType);
+            }
+
+            lotsQuery = lotsQuery.OrderByDescending(x => x.DateCreated);
+
+            var lots = await lotsQuery.ToListAsync();
 
             List<LotPublicView> lotsView = new List<LotPublicView>();
 
@@ -102,6 +109,7 @@ namespace api.Services
                 DateStart = DateTime.UtcNow,
                 DateEnd = DateTime.UtcNow.AddHours(lotCreateInput.Hours),
                 LotStatus = LotStatus.ACTIVE,
+                LotType = lotCreateInput.LotType,
             };
 
             _context.Lots.Add(lot);
@@ -152,6 +160,12 @@ namespace api.Services
             if (lot == null)
             {
                 _errorService.Add(ErrorCode.DATA_NOT_FOUND);
+                return;
+            }
+
+            if (lot.UserCreated.Id == _userContext.UserId)
+            {
+                _errorService.Add(ErrorCode.ACTION_IS_INVALID);
                 return;
             }
 

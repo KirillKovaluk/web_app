@@ -41,6 +41,20 @@
         </div>
       </div>
 
+      <div class="margin-top-10">
+        <div>
+          <span>Lot type</span>
+        </div>
+        <div class="margin-top-4">
+          <select v-model="lotType" @change="lotTypeChanged" class="form-select max-width-400" aria-label="Default select example">
+            <option 
+              v-for="(item, index) in lotTypesArray" :key="index" :selected="index === 0"
+              >{{ item }}
+            </option>
+          </select>
+        </div>
+      </div>
+
       <div v-show="false" class="margin-top-10">
         <input
           ref="input"
@@ -78,6 +92,7 @@
 <script>
 
 import { lotController } from '@/services/apiService';
+import { LotTypesArray, LotTypes, LotTypesValues } from '@/consts/lotTypes';
 
 export default {
   components: {
@@ -89,6 +104,9 @@ export default {
       hours: '',
       description: '',
 
+      lotType: LotTypes.NONE,
+      lotTypesArray: LotTypesArray,
+
       selectedFile: null,
     }
   },
@@ -96,7 +114,12 @@ export default {
   },
   computed: {
     createError() {
-      return this.nameError || this.priceStartError || this.hoursError || this.descriptoinError || this.selectedFileError;
+      return this.nameError
+      || this.priceStartError
+      || this.hoursError
+      || this.descriptoinError
+      || this.selectedFileError
+      || this.lotTypeError;
     },
     nameError() {
       return this.name.length === 0;
@@ -110,17 +133,22 @@ export default {
     descriptoinError  () {
       return this.description.length === 0;
     },
+    lotTypeError  () {
+      return this.lotType === LotTypes.NONE;
+    },
     selectedFileError  () {
       return this.selectedFile === null;
     },
   },
   methods: {
     createLot() {
+      const lotTypeValue = LotTypesValues[this.lotType];
       let lot = {
         name: this.name,
         description: this.description,
         priceStart: this.priceStart,
         hours: this.hours,
+        lotType: lotTypeValue,
       };
       lot.formFile = this.getFormData();
       lotController.createLotAsyncHttpPost(lot)
@@ -151,4 +179,7 @@ export default {
 .button-create {
  min-width: 120px;
 }
+.max-width-400 {
+  max-width: 400px;
+};
 </style>

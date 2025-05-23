@@ -6,5 +6,6 @@
         ELECTRONICS = 1,
         CAR = 2,
         PICTURES = 3,
+        CLOTHES = 4,
     }
 }

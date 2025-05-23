@@ -29,7 +29,11 @@
               <span>Description:</span>
               <span class="margin-left-5">{{ lot.description }}</span>
             </div>
-
+            <div>
+              <span>Lot type:</span>
+              <span class="margin-left-5">{{ lot.lotType }}</span>
+            </div>
+            
             <div v-if="lot.fileImages && lot.fileImages[0]" class="text-center">
               <img :src="getImageUrl() + lot.fileImages[0].path" alt="" class="lot-image">
             </div>

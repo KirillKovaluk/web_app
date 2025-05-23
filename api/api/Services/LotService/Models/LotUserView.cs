@@ -13,7 +13,7 @@ namespace api.Services
         public DateTime DateEnd { get; set; }
         public int Hours { get; set; }
         public LotStatus LotStatus { get; set; }
-        public LotType LotType { get; set; }
+        public string LotType { get; set; }
 
         public IEnumerable<FileImageView> FileImages { get; set; }
 
@@ -39,7 +39,7 @@ namespace api.Services
                 DateEnd = lot.DateEnd,
                 Hours = lot.Hours,
                 LotStatus = lot.LotStatus,
-                LotType = lot.LotType,
+                LotType = lot.LotType.ToString("G"),
 
                 UserCreatedId = lot.UserCreatedId,
                 UserBoughtId = lot.UserBoughtId,

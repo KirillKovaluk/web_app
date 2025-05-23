@@ -5,6 +5,12 @@
     </div>
     <div>
       <div class="text-center margin-top-10">
+        <select v-model="lotType" @change="lotTypeChanged" class="form-select" aria-label="Default select example">
+          <option 
+            v-for="(item, index) in lotTypesArray" :key="index" :selected="index === 0"
+            >{{ item }}
+          </option>
+        </select>
       </div>
       <div class="margin-top-10">
         <div v-for="(lot, index) in lots" :key="index" class="margin-top-10 lot-block">
@@ -30,6 +36,10 @@
               <span class="margin-left-5">{{ lot.description }}</span>
             </div>
             <div>
+              <span>Lot type:</span>
+              <span class="margin-left-5">{{ lot.lotType }}</span>
+            </div>
+            <div>
               <span>Price bet:</span>
               <span v-if="lot.priceBet" class="margin-left-5">{{ lot.priceBet }}</span>
               <span v-else class="margin-left-5">No bets</span>
@@ -40,7 +50,7 @@
             </div>
             
             <div class="margin-top-10">
-              <button @click="createBet(lot.id)" class="stile-button button-create">Place a bet</button>
+              <button @click="createBet(lot.id)" :disabled="isCreateBetDisabled(lot)" class="stile-button button-create">Place a bet</button>
             </div>
           </div>
         </div>
@@ -53,6 +63,8 @@
 
 import { lotController } from '@/services/apiService';
 import { getApiUrl } from '@/services/helperService';
+import { LotTypesArray, LotTypes, LotTypesValues } from '@/consts/lotTypes';
+import { useStore } from '@/stores/store';
 
 export default {
   components: {
@@ -60,18 +72,21 @@ export default {
   data() {
     return {
       lots: null,
+      lotType: LotTypes.NONE,
+      lotTypesArray: LotTypesArray,
     }
   },
   created() {
-    this.init(); 
+    this.init();
   },
   watch: { 
   },
   computed: {
   },
   methods: {
-    init(){
-      lotController.getLotsPublicAsyncHttpGet()
+    init() {
+      const lotTypeValue = LotTypesValues[this.lotType];
+      lotController.getLotsPublicAsyncHttpPost(lotTypeValue)
       .then((data) => {
         this.lots = data;
       });
@@ -84,6 +99,15 @@ export default {
     },
     getImageUrl() {
       return getApiUrl();
+    },
+    lotTypeChanged() {
+      this.init();
+    },
+    isCreateBetDisabled(lot) {
+      const store = useStore();
+      let user = store.getUser();
+      if (!user) return true;
+      return user.id === lot.userCreated.id;
     },
   },
 }

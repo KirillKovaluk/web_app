@@ -2,9 +2,11 @@ import api from './httpService'
 import { ContentTypes } from '../consts/contentTypes'
 
 export const lotController = {
-  getLotsPublicAsyncHttpGet: function (){
+  getLotsPublicAsyncHttpPost: function (lotType){
     return api({url: 'lot/get-lots-public'})
-      .get();
+      .post({
+        lotType,
+      });
   },
   getLotsCreatedAsyncHttpGet: function (){
     return api({url: 'lot/get-lots-created'})
@@ -20,8 +22,9 @@ export const lotController = {
     request.append('description', model.description);
     request.append('priceStart', model.priceStart);
     request.append('hours', model.hours);
+    request.append('lotType', model.lotType);
     return api({ url: 'lot/create-lot', contentType: ContentTypes.formData  })
-      .post(request );
+      .post(request);
   },
   betLotAsyncHttpPost: function (id){
     return api({url: 'lot/bet-lot'})
